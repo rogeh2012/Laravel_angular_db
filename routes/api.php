@@ -34,7 +34,22 @@ Route::post('brands', [BrandController::class, 'store']);
 Route::put('/brands/{brand}', [BrandController::class,'update']);
 Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
 
-
+Route::post('/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+ 
+    $brand = Brand::where('email', $request->email)->first();
+ 
+    if (! $brand || ! Hash::check($request->password, $brand->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+ 
+    return $brand->createToken($request->device_name)->plainTextToken;
+});
 
 Route::get('influencers', [InfluencerController::class, 'index']);
 Route::get('influencers/{influencer}', [InfluencerController::class, 'show']);
