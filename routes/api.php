@@ -28,13 +28,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('brands', [BrandController::class, 'index']);
+Route::get('brands', [BrandController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/brand', [BrandController::class, 'brand'])->middleware('auth:sanctum');
 Route::get('brands/{brand}', [BrandController::class, 'show']);
 Route::post('brands', [BrandController::class, 'store']);
 Route::put('/brands/{brand}', [BrandController::class,'update']);
 Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
 
-Route::post('/sanctum/token', function (Request $request) {
+Route::post('brands/sanctum/token', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
@@ -48,7 +49,10 @@ Route::post('/sanctum/token', function (Request $request) {
         ]);
     }
  
-    return $brand->createToken($request->device_name)->plainTextToken;
+   $token = $brand->createToken($request->email)->plainTextToken;
+   return response()->json([
+    'access_token' => $token,
+   ]);
 });
 
 Route::get('influencers', [InfluencerController::class, 'index']);

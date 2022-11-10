@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Brand;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 // use App\Models\Campaign;
@@ -17,6 +18,9 @@ class BrandController extends Controller
         // $allBrands = Brand::all();
         // return BrandResource::collection($allBrands);
         return Brand::all();
+    }
+    public function brand(Request $request) {
+        return $request->user();
     }
 
         public function show($brandId)
