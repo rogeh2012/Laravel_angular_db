@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\InfluencerController;
 use App\Http\Controllers\Api\CampaignController;
+use App\Http\Controllers\Api\InstagramController;
+use App\Http\Controllers\Api\TikTokController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -49,3 +51,9 @@ Route::get('campaigns/{campaign}', [CampaignController::class, 'show']);
 Route::post('campaigns', [CampaignController::class, 'store']);
 Route::put('/campaigns/{campaign}', [CampaignController::class,'update']);
 Route::delete('/campaigns/{campaign}', [CampaignController::class,'destroy']);
+
+
+Route::post('campaigns/instagram/{campaign}', [InstagramController::class, 'store']);
+
+Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
+
