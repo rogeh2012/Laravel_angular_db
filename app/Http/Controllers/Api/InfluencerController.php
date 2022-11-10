@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Influencer;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class InfluencerController extends Controller
@@ -22,29 +22,60 @@ class InfluencerController extends Controller
         public function store()
         {
             $data = request()->all();
-            $influencer = Influencer::create([
-                'fname' => $data['fname'],
-                'lname' => $data['lname'],
-                'email' => $data['email'],
-                'phone' => $data['phone'],
-                'password' => $data['password'],
-                'hear_about_us' => $data['hear_about_us'],
-                'occupation' => $data['occupation'],
-                'instagram' => $data['instagram'],
-                'facebook' => $data['facebook'],
-                'snapchat' => $data['snapchat'],
-                'age' => $data['age'],
-                'price' => $data['price'],
-                'engagement_rate' => $data['engaengagement_ratege'],
-                'followers' => $data['followers'],
-                'gender' => $data['gender'],
-                'children' => $data['children'],
-                'country' => $data['country'],
-
-            ]);
-
-            // return ("Stored successfuly"); //what to return
-            return ($influencer); //what to return
+            $influencer = new Influencer();
+            if(isset($data['fname'])){
+                $influencer->fname=$data['fname'];
+            }
+            if(isset($data['lname'])){
+                $influencer->lname=$data['lname'];
+            }
+            if(isset($data['email'])){
+                $influencer->email=$data['email'];
+            }
+            if(isset($data['phone'])){
+                $influencer->phone=$data['phone'];
+            }
+            if(isset($data['password'])){
+                $influencer->password= Hash::make($data['password']);
+            }
+            if(isset($data['hear_about_us'])){
+                $influencer->hear_about_us=$data['hear_about_us'];
+            }
+            if(isset($data['occupation'])){
+                $influencer->occupation=$data['occupation'];
+            }
+            if(isset($data['instagram'])){
+                $influencer->instagram=$data['instagram'];
+            }
+            if(isset($data['facebook'])){
+                $influencer->facebook=$data['facebook'];
+            }
+            if(isset($data['snapchat'])){
+                $influencer->snapchat=$data['snapchat'];
+            }
+            if(isset($data['age'])){
+                $influencer->age=$data['age'];
+            }
+            if(isset($data['price'])){
+                $influencer->price=$data['price'];
+            }
+            if(isset($data['engagement_rate'])){
+                $influencer->engagement_rate=$data['engagement_rate'];
+            }
+            if(isset($data['followers'])){
+                $influencer->followers=$data['followers'];
+            }
+            if(isset($data['gender'])){
+                $influencer->gender=$data['gender'];
+            }
+            if(isset($data['children'])){
+                $influencer->children=$data['children'];
+            }
+            if(isset($data['country'])){
+                $influencer->country=$data['country'];
+            }
+            $influencer->save();
+            return ($influencer);
         }
 
         public function update($influencerId)

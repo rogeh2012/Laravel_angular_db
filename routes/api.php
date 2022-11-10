@@ -30,13 +30,32 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('brands', [BrandController::class, 'index']);
+Route::get('brands', [BrandController::class, 'index'])->middleware('auth:sanctum');
+Route::get('/brand', [BrandController::class, 'brand'])->middleware('auth:sanctum');
 Route::get('brands/{brand}', [BrandController::class, 'show']);
 Route::post('brands', [BrandController::class, 'store']);
 Route::put('/brands/{brand}', [BrandController::class,'update']);
 Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
 
-
+Route::post('brands/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+ 
+    $brand = Brand::where('email', $request->email)->first();
+ 
+    if (! $brand || ! Hash::check($request->password, $brand->password)) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided credentials are incorrect.'],
+        ]);
+    }
+ 
+   $token = $brand->createToken($request->email)->plainTextToken;
+   return response()->json([
+    'access_token' => $token,
+   ]);
+});
 
 Route::get('influencers', [InfluencerController::class, 'index']);
 Route::get('influencers/{influencer}', [InfluencerController::class, 'show']);
