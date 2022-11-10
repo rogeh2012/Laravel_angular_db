@@ -32,6 +32,9 @@ class CampaignController extends Controller
                 'start_date' => $data['start_date'],
                 'instagram' => $data['instagram'],
                 'tiktok' => $data['tiktok'],
+                'pending' => $data['pending'],
+                'completed' => $data['completed'],
+                'drafts' => $data['drafts'],
                 // 'image' => $data['image'],
             ]);
 

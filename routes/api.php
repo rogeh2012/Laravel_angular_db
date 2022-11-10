@@ -42,15 +42,15 @@ Route::post('brands/sanctum/token', function (Request $request) {
         'email' => 'required|email',
         'password' => 'required',
     ]);
- 
+
     $brand = Brand::where('email', $request->email)->first();
- 
+
     if (! $brand || ! Hash::check($request->password, $brand->password)) {
         throw ValidationException::withMessages([
             'email' => ['The provided credentials are incorrect.'],
         ]);
     }
- 
+
    $token = $brand->createToken($request->email)->plainTextToken;
    return response()->json([
     'access_token' => $token,

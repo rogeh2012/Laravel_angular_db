@@ -34,6 +34,9 @@ class Campaign extends Model
         'privacy',
         'instagram',
         'tiktok',
-        'image'
+        'image',
+        'pending',
+        'completed',
+        'drafts'
     ];
 }

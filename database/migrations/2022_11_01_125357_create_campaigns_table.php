@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('type');
             $table->string('country');
             $table->string('details')->nullable();
+            $table->boolean('pending')->nullable();
+            $table->boolean('completed')->nullable();
+            $table->boolean('drafts')->nullable();
             $table->timestamps();
         });
     }
