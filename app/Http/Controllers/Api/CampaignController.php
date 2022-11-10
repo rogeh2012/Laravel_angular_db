@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Api;
 use App\Models\Campaign;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\CampaignResource;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
     public function index()
     {
-
-        return Campaign::all();
+        $campaigns = Campaign::all();
+        return CampaignResource::collection($campaigns);
     }
 
         public function show($campaignId)
         {
+            $campaign= Campaign::find($campaignId);
+            return new CampaignResource($campaign);
 
-            return Campaign::find($campaignId);
         }
 
         public function store()
@@ -28,8 +29,10 @@ class CampaignController extends Controller
                 'type' => $data['type'],
                 'country' => $data['country'],
                 'details' => $data['details'],
-
-
+                'start_date' => $data['start_date'],
+                'instagram' => $data['instagram'],
+                'tiktok' => $data['tiktok'],
+                // 'image' => $data['image'],
             ]);
 
             // return ("Stored successfuly"); //what to return
