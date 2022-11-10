@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class Brand extends Model
+class BrandInformation extends Model
 {
     use HasFactory;
-
-    public function campaigns()
-    {
-        return $this->hasMany(Campaign::class);
-    }
-    public function brandInformation(){
-        return $this->hasOne(BrandInformation::class);
-    }
+    
+   
     protected $fillable = [
         'fname',
         'lname',
@@ -29,5 +22,3 @@ class Brand extends Model
         'job_title',
     ];
 }
-//fillable
-

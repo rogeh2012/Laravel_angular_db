@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Brand;
+use App\Models\BrandInformation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,6 @@ class BrandController extends Controller
 
         public function show($brandId)
         {
-            // $brand = Brand::find($brandId);
-            // return new BrandResource($brand);
             return Brand::find($brandId);
         }
 

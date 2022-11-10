@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\InfluencerController;
 use App\Http\Controllers\Api\CampaignController;
+use App\Http\Controllers\BrandInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -11,6 +12,7 @@ use App\Models\Campaign;
 use App\Models\Influencer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -47,8 +49,10 @@ Route::post('/sanctum/token', function (Request $request) {
             'email' => ['The provided credentials are incorrect.'],
         ]);
     }
- 
-    return $brand->createToken($request->device_name)->plainTextToken;
+    $token = $brand->createToken($request->device_name)->plainTextToken;
+    return response()-> json([
+        'access_token'=> $token
+    ]);
 });
 
 Route::get('influencers', [InfluencerController::class, 'index']);
@@ -64,3 +68,6 @@ Route::get('campaigns/{campaign}', [CampaignController::class, 'show']);
 Route::post('campaigns', [CampaignController::class, 'store']);
 Route::put('/campaigns/{campaign}', [CampaignController::class,'update']);
 Route::delete('/campaigns/{campaign}', [CampaignController::class,'destroy']);
+
+Route::get('brandinfo',[BrandInformationController::class,'index']);
+Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
