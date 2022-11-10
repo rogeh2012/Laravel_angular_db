@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\Brand;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 // use App\Models\Campaign;
 // use App\Models\Influencer;
 
-use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -17,6 +18,9 @@ class BrandController extends Controller
         // $allBrands = Brand::all();
         // return BrandResource::collection($allBrands);
         return Brand::all();
+    }
+    public function brand(Request $request) {
+        return $request->user();
     }
 
         public function show($brandId)
@@ -29,22 +33,40 @@ class BrandController extends Controller
         public function store()
         {
             $data = request()->all();
-            $brand = Brand::create([
-                'fname' => $data['fname'],
-                'lname' => $data['lname'],
-                'email' => $data['email'],
-                'phone' => $data['phone'],
-                'password' => $data['password'],
-                'hear_about_us' => $data['hear_about_us'],
-                'occupation' => $data['occupation'],
-                'instagram' => $data['instagram'],
-                'facebook' => $data['facebook'],
-                'snapchat' => $data['snapchat'],
-
-            ]);
-
-            // return ("Stored successfuly"); //what to return
-            return ($brand); //what to return
+            $brand = new Brand();
+          
+            if(isset($data['fname'])){
+                $brand->fname=$data['fname'];
+            }
+            if(isset($data['lname'])){
+                $brand->lname=$data['lname'];
+            }
+            if(isset($data['email'])){
+                $brand->email=$data['email'];
+            }
+            if(isset($data['phone'])){
+                $brand->phone=$data['phone'];
+            }
+            if(isset($data['password'])){
+                $brand->password=Hash::make($data['password']);
+            }
+            if(isset($data['hear_about_us'])){
+                $brand->hear_about_us=$data['hear_about_us'];
+            }
+            if(isset($data['brand_name'])){
+                $brand->brand_name=$data['brand_name'];
+            }
+            if(isset($data['instagram'])){
+                $brand->instagram=$data['instagram'];
+            }
+            if(isset($data['job_title'])){
+                $brand->job_title=$data['job_title'];
+            }
+            if(isset($data['snapchat'])){
+                $brand->snapchat=$data['snapchat'];
+            }
+            $brand->save();
+            return ($brand);
         }
 
         public function update($brandId)
