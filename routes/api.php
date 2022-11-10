@@ -76,3 +76,6 @@ Route::post('campaigns/instagram/{campaign}', [InstagramController::class, 'stor
 
 Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
 
+Route::get('campaigns/pending', [CampaignController::class, 'getpending']);
+Route::get('campaigns/completed', [CampaignController::class, 'getcompleted']);
+Route::get('campaigns/drafts', [CampaignController::class, 'getdrafts']);

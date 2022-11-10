@@ -66,4 +66,17 @@ class CampaignController extends Controller
 
         return "Campaign $campaignId deleted successfuly";
     }
+
+        public function getpending(){
+
+        }
+
+        public function getcompleted(){
+
+        }
+
+        public function getdrafts(){
+
+        }
+
 }
