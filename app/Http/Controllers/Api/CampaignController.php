@@ -69,14 +69,18 @@ class CampaignController extends Controller
 
         public function getpending(){
 
+            $pendingcampaigns= Campaign::where('pending', 1);
+            return $pendingcampaigns;
         }
 
         public function getcompleted(){
-
+            $completedcampaigns= Campaign::where('completed', 1);
+            return $completedcampaigns;
         }
 
         public function getdrafts(){
-
+            $drafts= Campaign::where('drafts', 1);
+            return $drafts;
         }
 
 }
