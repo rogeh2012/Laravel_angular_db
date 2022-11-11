@@ -54,6 +54,7 @@ Route::post('brands/sanctum/token', function (Request $request) {
    $token = $brand->createToken($request->email)->plainTextToken;
    return response()->json([
     'access_token' => $token,
+    'isAdmin' => $brand['isAdmin'],
    ]);
 });
 
