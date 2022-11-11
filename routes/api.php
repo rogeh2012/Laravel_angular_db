@@ -92,3 +92,7 @@ Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 
+
+Route::get('pending', [CampaignController::class, 'getpending']);
+Route::get('completed', [CampaignController::class, 'getcompleted']);
+Route::get('drafts', [CampaignController::class, 'getdrafts']);
