@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('brand_information', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('brand_id');
             $table->timestamps();
             $table->string('about');
             $table->string('industries');
@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('facebook')->nullable();
             $table->string('tiktok')->nullable();
             $table->string('youtube')->nullable();
+            $table->foreign('brand_id')->references('id')->on('brands');
         });
     }
 

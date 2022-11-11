@@ -8,17 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class BrandInformation extends Model
 {
     use HasFactory;
-    
-   
     protected $fillable = [
-        'fname',
-        'lname',
-        'email',
-        'phone',
-        'password',
-        'hear_about_us',
-        'brand_name',
-        'instagram',
-        'job_title',
+        'brand_id',
+        'about',
+        'industries',
+        'location',
+        'facebook',
+        'tiktok',
+        'youtube',
     ];
 }

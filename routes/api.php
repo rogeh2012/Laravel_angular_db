@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('brands', [BrandController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/brand', [BrandController::class, 'brand'])->middleware('auth:sanctum');
-Route::get('brands/{brand}', [BrandController::class, 'show']);
+Route::get('brands/{brand}', [BrandController::class, 'show'])->middleware('auth:sanctum');
 Route::post('brands', [BrandController::class, 'store']);
 Route::put('/brands/{brand}', [BrandController::class,'update']);
 Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
@@ -81,3 +81,4 @@ Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
 
 Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+
