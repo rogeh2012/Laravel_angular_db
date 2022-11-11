@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\InfluencerController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\InstagramController;
 use App\Http\Controllers\Api\TikTokController;
+use App\Http\Controllers\BrandInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -13,6 +14,7 @@ use App\Models\Campaign;
 use App\Models\Influencer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('brands', [BrandController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/brand', [BrandController::class, 'brand'])->middleware('auth:sanctum');
-Route::get('brands/{brand}', [BrandController::class, 'show']);
+Route::get('brands/{brand}', [BrandController::class, 'show'])->middleware('auth:sanctum');
 Route::post('brands', [BrandController::class, 'store']);
 Route::put('/brands/{brand}', [BrandController::class,'update']);
 Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
@@ -82,3 +84,11 @@ Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
 Route::get('campaigns/pending', [CampaignController::class, 'getpending']);
 Route::get('campaigns/completed', [CampaignController::class, 'getcompleted']);
 Route::get('campaigns/drafts', [CampaignController::class, 'getdrafts']);
+
+Route::get('brandinfo',[BrandInformationController::class,'index']);
+Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+
+
+Route::get('brandinfo',[BrandInformationController::class,'index']);
+Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+

@@ -16,6 +16,9 @@ class Brand extends Model
     {
         return $this->hasMany(Campaign::class);
     }
+    public function brandInformation(){
+        return $this->hasOne(brandInformation::class);
+    }
     protected $fillable = [
         'fname',
         'lname',
