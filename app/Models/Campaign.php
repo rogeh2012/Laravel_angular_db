@@ -12,12 +12,31 @@ class Campaign extends Model
     public function influencers()
     {
         return $this->belongsToMany(Influencer::class);
+
     }
+
+    public function instagramDetail()
+    {
+        return $this->hasOne(InstagramDetail::class);
+    }
+
+    public function tiktokDetail()
+    {
+        return $this->hasOne(TiktokDetail::class);
+    }
+
     protected $fillable = [
         'title',
         'type',
         'country',
         'details',
-
+        'start_date',
+        'privacy',
+        'instagram',
+        'tiktok',
+        'image',
+        'pending',
+        'completed',
+        'drafts'
     ];
 }

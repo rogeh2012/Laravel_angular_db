@@ -18,12 +18,12 @@ return new class extends Migration
             $table->string('fname');
             $table->string('lname')->nullable();
             $table->string('email');
-            $table->string('phone')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
             $table->string('hear_about_us')->nullable();
-            $table->string('occupation')->nullable();
+            $table->string('brand_name')->nullable();
+            $table->string('job_title')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('facebook')->nullable();
             $table->string('snapchat')->nullable();
             $table->timestamps();
         });

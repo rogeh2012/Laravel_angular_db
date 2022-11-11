@@ -1,42 +1,48 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\Campaign;
 use App\Http\Controllers\Controller;
-
+use App\Http\Resources\CampaignResource;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
 {
     public function index()
     {
-
-        return Campaign::all();
+        $campaigns = Campaign::all();
+        return CampaignResource::collection($campaigns);
     }
 
-        public function show($campaignId)
-        {
+    public function show($campaignId)
+    {
+        $campaign = Campaign::find($campaignId);
+        return new CampaignResource($campaign);
+    }
 
-            return Campaign::find($campaignId);
-        }
+    public function store()
+    {
+        $data = request()->all();
+        $campaign = Campaign::create([
+            'title' => $data['title'],
+            'type' => $data['type'],
+            'country' => $data['country'],
+            'details' => $data['details'],
+            'start_date' => $data['start_date'],
+            'instagram' => $data['instagram'],
+            'tiktok' => $data['tiktok'],
+            // 'pending' => $data['pending'],
+            // 'completed' => $data['completed'],
+            // 'drafts' => $data['drafts'],
+            // 'image' => $data['image'],
+        ]);
 
-        public function store()
-        {
-            $data = request()->all();
-            $campaign = Campaign::create([
-                'title' => $data['title'],
-                'type' => $data['type'],
-                'country' => $data['country'],
-                'details' => $data['details'],
+        // return ("Stored successfuly"); //what to return
+        return ($campaign); //what to return
+    }
 
-
-            ]);
-
-            // return ("Stored successfuly"); //what to return
-            return ($campaign); //what to return
-        }
-
-        public function update($campaignId)
+    public function update($campaignId)
     {
 
         $campaign = Campaign::find($campaignId);
@@ -59,5 +65,24 @@ class CampaignController extends Controller
         $campaign->delete();
 
         return "Campaign $campaignId deleted successfuly";
+    }
+
+    public function getpending()
+    {
+        $campaigns = Campaign::where('pending', 1)->get();
+        return CampaignResource::collection($campaigns);
+    }
+
+    public function getcompleted()
+    {
+        $campaigns = Campaign::where('completed', 1)->get();
+        return CampaignResource::collection($campaigns);
+        
+    }
+
+    public function getdrafts()
+    {
+        $campaigns = Campaign::where('drafts', 1)->get();
+        return CampaignResource::collection($campaigns);
     }
 }
