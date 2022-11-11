@@ -21,22 +21,7 @@ class CampaignController extends Controller
         return new CampaignResource($campaign);
     }
 
-    public function store()
-    {
-        $data = request()->all();
-        $campaign = Campaign::create([
-            'title' => $data['title'],
-            'type' => $data['type'],
-            'country' => $data['country'],
-            'details' => $data['details'],
-            'start_date' => $data['start_date'],
-            'instagram' => $data['instagram'],
-            'tiktok' => $data['tiktok'],
-            // 'pending' => $data['pending'],
-            // 'completed' => $data['completed'],
-            // 'drafts' => $data['drafts'],
-            // 'image' => $data['image'],
-        ]);
+
         public function store()
         {
             $data = request()->all();
@@ -74,8 +59,6 @@ class CampaignController extends Controller
         // $campaign->image = request()->image;
 
         $campaign->save();
-
-        // return new CampaignResource($campaign);
         return ($campaign);
     }
 

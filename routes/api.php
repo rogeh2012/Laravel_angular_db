@@ -89,10 +89,22 @@ Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 
 
-Route::get('brandinfo',[BrandInformationController::class,'index']);
-Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 
 
-Route::get('pending', [CampaignController::class, 'getpending']);
-Route::get('completed', [CampaignController::class, 'getcompleted']);
-Route::get('drafts', [CampaignController::class, 'getdrafts']);
+// Route::get('pending', [CampaignController::class, 'getpending']);
+// Route::get('completed', [CampaignController::class, 'getcompleted']);
+// Route::get('drafts', [CampaignController::class, 'getdrafts']);
+
+// Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
+// Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
+
+// Route::get('pending', [CampaignController::class, 'getpending']);
+// Route::get('completed', [CampaignController::class, 'getcompleted']);
+// Route::get('drafts', [CampaignController::class, 'getdrafts']);
+
+// Route::get('brandinfo',[BrandInformationController::class,'index']);
+// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+
+
+// Route::get('brandinfo',[BrandInformationController::class,'index']);
+// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
