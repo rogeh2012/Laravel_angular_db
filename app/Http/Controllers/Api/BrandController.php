@@ -65,6 +65,7 @@ class BrandController extends Controller
             if(isset($data['snapchat'])){
                 $brand->snapchat=$data['snapchat'];
             }
+           
             $brand->save();
             return ($brand);
         }

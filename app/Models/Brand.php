@@ -26,6 +26,7 @@ class Brand extends Model
         'brand_name',
         'instagram',
         'job_title',
+        
     ];
     
 }
