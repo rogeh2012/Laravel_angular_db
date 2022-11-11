@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('job_title')->nullable();
             $table->string('instagram')->nullable();
             $table->string('snapchat')->nullable();
+            $table->boolean('isAdmin')->default(false);
             $table->timestamps();
         });
     }

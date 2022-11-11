@@ -26,6 +26,9 @@ class CampaignResource extends JsonResource
             'instagram' => $this->instagram,
             'tiktok' => $this->tiktok,
             'image' => $this->image,
+            'pending' => $this->pending,
+            'completed' => $this->completed,
+            'drafts' => $this->drafts,
             'instagram_info' => new InstagramDetailResource($this->instagramDetail),
             'tiktok_info' => new TiktokDetailResource($this->tiktokDetail)
         ];

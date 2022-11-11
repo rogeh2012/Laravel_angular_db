@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Api;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Brand;
+use App\Models\BrandInformation;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BrandResource;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
+use Illuminate\support\Facades\Auth;
 // use App\Models\Campaign;
 // use App\Models\Influencer;
-
 
 class BrandController extends Controller
 {
@@ -20,21 +21,14 @@ class BrandController extends Controller
         return Brand::all();
     }
     public function brand(Request $request) {
-        return $request->user();
+        // $brandId = Auth::user();
+        $brandId = $request->user();
+        return new BrandResource($brandId) ;
     }
-
-        public function show($brandId)
-        {
-            // $brand = Brand::find($brandId);
-            // return new BrandResource($brand);
-            return Brand::find($brandId);
-        }
-
         public function store()
         {
             $data = request()->all();
-            $brand = new Brand();
-          
+            $brand = new Brand();     
             if(isset($data['fname'])){
                 $brand->fname=$data['fname'];
             }
@@ -65,6 +59,7 @@ class BrandController extends Controller
             if(isset($data['snapchat'])){
                 $brand->snapchat=$data['snapchat'];
             }
+           
             $brand->save();
             return ($brand);
         }
@@ -99,3 +94,4 @@ class BrandController extends Controller
         return "Brand $brandId deleted successfuly";
     }
 }
+

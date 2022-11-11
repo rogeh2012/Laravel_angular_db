@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('campaigns_influencers', function (Blueprint $table) {
             $table->unsignedBigInteger('campaign_id');
             $table->unsignedBigInteger('influencer_id');
-
             $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
             $table->foreign('influencer_id')->references('id')->on('influencers')->onDelete('cascade');
             $table->timestamps();

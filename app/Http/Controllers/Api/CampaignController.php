@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api;
+
 use App\Models\Campaign;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CampaignResource;
@@ -14,12 +15,12 @@ class CampaignController extends Controller
         return CampaignResource::collection($campaigns);
     }
 
-        public function show($campaignId)
-        {
-            $campaign= Campaign::find($campaignId);
-            return new CampaignResource($campaign);
+    public function show($campaignId)
+    {
+        $campaign = Campaign::find($campaignId);
+        return new CampaignResource($campaign);
+    }
 
-        }
 
         public function store()
         {
@@ -32,10 +33,12 @@ class CampaignController extends Controller
                 'start_date' => $data['start_date'],
                 'instagram' => $data['instagram'],
                 'tiktok' => $data['tiktok'],
+                // 'pending' => $data['pending'],
+                // 'completed' => $data['completed'],
+                // 'drafts' => $data['drafts'],
                 // 'image' => $data['image'],
             ]);
 
-            // return ("Stored successfuly"); //what to return
             return ($campaign); //what to return
         }
 
@@ -48,19 +51,42 @@ class CampaignController extends Controller
         $campaign->type = request()->type;
         $campaign->country = request()->country;
         $campaign->details = request()->details;
-
+        $campaign->start_date = request()->start_date;
+        $campaign->instagram = request()->instagram;
+        // $campaign->pending = request()->pending;
+        // $campaign->completed = request()->completed;
+        // $campaign->drafts = request()->drafts;
+        // $campaign->image = request()->image;
 
         $campaign->save();
-
-
         return ($campaign);
     }
+
     public function destroy($campaignId)
     {
         $campaign = Campaign::find($campaignId);
 
         $campaign->delete();
 
-        return "Campaign $campaignId deleted successfuly";
+        return "";
+    }
+
+    public function getpending()
+    {
+        $campaigns = Campaign::where('pending', 1)->get();
+        return CampaignResource::collection($campaigns);
+    }
+
+    public function getcompleted()
+    {
+        $campaigns = Campaign::where('completed', 1)->get();
+        return CampaignResource::collection($campaigns);
+
+    }
+
+    public function getdrafts()
+    {
+        $campaigns = Campaign::where('drafts', 1)->get();
+        return CampaignResource::collection($campaigns);
     }
 }
