@@ -81,9 +81,9 @@ Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
 Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
 Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
 
-Route::get('campaigns/pending', [CampaignController::class, 'getpending']);
-Route::get('campaigns/completed', [CampaignController::class, 'getcompleted']);
-Route::get('campaigns/drafts', [CampaignController::class, 'getdrafts']);
+Route::get('pending', [CampaignController::class, 'getpending']);
+Route::get('completed', [CampaignController::class, 'getcompleted']);
+Route::get('drafts', [CampaignController::class, 'getdrafts']);
 
 Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
