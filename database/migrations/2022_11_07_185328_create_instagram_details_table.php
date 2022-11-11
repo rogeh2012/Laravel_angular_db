@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('ig_hashtags', 500);
             $table->string('ig_tags', 500);
             $table->timestamps();
-            $table->foreign('campaign_id')->references('id')->on('campaigns');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');;
         });
     }
 

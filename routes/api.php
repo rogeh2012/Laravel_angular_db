@@ -73,8 +73,10 @@ Route::delete('/campaigns/{campaign}', [CampaignController::class,'destroy']);
 
 
 Route::post('campaigns/instagram/{campaign}', [InstagramController::class, 'store']);
-
 Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
+
+Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
+Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
 
 Route::get('campaigns/pending', [CampaignController::class, 'getpending']);
 Route::get('campaigns/completed', [CampaignController::class, 'getcompleted']);

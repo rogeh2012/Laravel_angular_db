@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tik_tok_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->n;
             $table->integer('tt_posts_imgs');
             $table->integer('tt_posts_vids');
             $table->integer('tt_stories_imgs');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('tt_hashtags', 500);
             $table->string('tt_tags', 500);
             $table->timestamps();
-            $table->foreign('campaign_id')->references('id')->on('campaigns');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');;
         });
     }
 

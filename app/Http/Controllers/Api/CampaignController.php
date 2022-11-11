@@ -32,13 +32,12 @@ class CampaignController extends Controller
                 'start_date' => $data['start_date'],
                 'instagram' => $data['instagram'],
                 'tiktok' => $data['tiktok'],
-                'pending' => $data['pending'],
-                'completed' => $data['completed'],
-                'drafts' => $data['drafts'],
+                // 'pending' => $data['pending'],
+                // 'completed' => $data['completed'],
+                // 'drafts' => $data['drafts'],
                 // 'image' => $data['image'],
             ]);
 
-            // return ("Stored successfuly"); //what to return
             return ($campaign); //what to return
         }
 
@@ -51,20 +50,26 @@ class CampaignController extends Controller
         $campaign->type = request()->type;
         $campaign->country = request()->country;
         $campaign->details = request()->details;
-
+        $campaign->start_date = request()->start_date;
+        $campaign->instagram = request()->instagram;
+        // $campaign->pending = request()->pending;
+        // $campaign->completed = request()->completed;
+        // $campaign->drafts = request()->drafts;
+        // $campaign->image = request()->image;
 
         $campaign->save();
 
-
+        // return new CampaignResource($campaign);
         return ($campaign);
     }
+
     public function destroy($campaignId)
     {
         $campaign = Campaign::find($campaignId);
 
         $campaign->delete();
 
-        return "Campaign $campaignId deleted successfuly";
+        return "";
     }
 
         public function getpending(){
