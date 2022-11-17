@@ -22,24 +22,42 @@ class CampaignController extends Controller
     }
 
 
-        public function store()
+        public function store(Request $request)
         {
-            $data = request()->all();
-            $campaign = Campaign::create([
-                'title' => $data['title'],
-                'type' => $data['type'],
-                'country' => $data['country'],
-                'details' => $data['details'],
-                'start_date' => $data['start_date'],
-                'instagram' => $data['instagram'],
-                'tiktok' => $data['tiktok'],
-                // 'pending' => $data['pending'],
-                // 'completed' => $data['completed'],
-                // 'drafts' => $data['drafts'],
-                // 'image' => $data['image'],
-            ]);
+            $campaign = new Campaign;
+            $campaign -> title = $request->input('title');
+            $campaign -> type = $request->input('type');
+            $campaign -> country = $request->input('country');
+            $campaign -> details = $request->input('details');
+            // $campaign -> start_date = $request->input('start_date');
+            $campaign -> instagram = $request->input('instagram');
+            $campaign -> tiktok = $request->input('tiktok');
+            if($request->hasFile('image')){
+                $file = $request->file('image');
+                $extention = $file->getClientOriginalExtension();
+                $fileName = time() . '.' . $extention; 
+                $file->move('campaignsImage',$fileName);
+                $campaign -> image = $fileName;
+            }
+            $campaign->save();
+            return $campaign;
+            // $campaign -> image = ;
+            // $campaign = Campaign::create([
+            //     'title' => $data['title'],
+            //     'type' => $data['type'],
+            //     'country' => $data['country'],
+            //     'details' => $data['details'],
+            //     'start_date' => $data['start_date'],
+            //     'instagram' => $data['instagram'],
+            //     'tiktok' => $data['tiktok'],
 
-            return ($campaign); //what to return
+            //     // 'pending' => $data['pending'],
+            //     // 'completed' => $data['completed'],
+            //     // 'drafts' => $data['drafts'],
+            //     // 'image' => $data['image'],
+            // ]);
+
+            // return ($campaign); //what to return
         }
 
         public function update($campaignId)

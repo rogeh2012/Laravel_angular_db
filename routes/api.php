@@ -46,10 +46,13 @@ Route::post('brands/sanctum/token', function (Request $request) {
     ]);
 
     $brand = Brand::where('email', $request->email)->first();
-
-    if (! $brand || ! Hash::check($request->password, $brand->password)) {
+    if (! $brand ) {
         throw ValidationException::withMessages([
-            'email' => ['The provided credentials are incorrect.'],
+            'email' => ['The provided email is incorrect.'],
+        ]);
+    }else if(! Hash::check($request->password, $brand->password)){
+        throw ValidationException::withMessages([
+            'password' => ['The provided password is incorrect.'],
         ]);
     }
 
@@ -62,10 +65,34 @@ Route::post('brands/sanctum/token', function (Request $request) {
 
 Route::get('influencers', [InfluencerController::class, 'index']);
 Route::get('influencers/{influencer}', [InfluencerController::class, 'show']);
+Route::get('/influencer', [BrandController::class, 'influencer'])->middleware('auth:sanctum');
 Route::post('influencers', [InfluencerController::class, 'store']);
 Route::put('/influencers/{influencer}', [InfluencerController::class,'update']);
 Route::delete('/influencers/{influencer}', [InfluencerController::class,'destroy']);
 
+Route::post('influencers/sanctum/token', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    $influencer = Influencer::where('email', $request->email)->first();
+    if (! $influencer ) {
+        throw ValidationException::withMessages([
+            'email' => ['The provided email is incorrect.'],
+        ]);
+    }else if(! Hash::check($request->password, $influencer->password)){
+        throw ValidationException::withMessages([
+            'password' => ['The provided password is incorrect.'],
+        ]);
+    }
+
+   $token = $influencer->createToken($request->email)->plainTextToken;
+   return response()->json([
+    'access_token' => $token,
+    
+   ]);
+});
 
 
 Route::get('campaigns', [CampaignController::class, 'index']);

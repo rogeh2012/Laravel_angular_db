@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Influencer extends Model
 {
-    use HasFactory;
+    use HasApiTokens, HasFactory,Authenticatable;
 
     public function campaigns()
     {

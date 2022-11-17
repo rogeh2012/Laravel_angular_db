@@ -19,6 +19,10 @@ class InfluencerController extends Controller
             return Influencer::find($influencerId);
         }
 
+        public function influencer(Request $request) {
+            $influencer = $request->user();
+            return  $influencer ;
+        }
         public function store()
         {
             $data = request()->all();
