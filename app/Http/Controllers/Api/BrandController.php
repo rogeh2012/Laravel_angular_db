@@ -73,15 +73,13 @@ class BrandController extends Controller
         $brand->lname = request()->lname;
         $brand->email = request()->email;
         $brand->phone = request()->phone;
-        $brand->password = request()->password;
-        $brand->hear_about_us = request()->hear_about_us;
-        $brand->occupation = request()->occupation;
+        // $brand->password = request()->password;
+        // $brand->hear_about_us = request()->hear_about_us;
+        $brand->brand_name = request()->brandname;
+        $brand->job_title = request()->job_title;
         $brand->instagram = request()->instagram;
-        $brand->facebook = request()->facebook;
         $brand->snapchat = request()->snapchat;
-
         $brand->save();
-
 
         return ($brand);
     }
