@@ -18,7 +18,7 @@ class BrandController extends Controller
     {
         // $allBrands = Brand::all();
         // return BrandResource::collection($allBrands);
-        return Brand::all();
+        return Brand::all();    
     }
     public function brand(Request $request) {
         // $brandId = Auth::user();
@@ -28,7 +28,7 @@ class BrandController extends Controller
         public function store()
         {
             $data = request()->all();
-            $brand = new Brand();     
+            $brand = new Brand();
             if(isset($data['fname'])){
                 $brand->fname=$data['fname'];
             }
@@ -59,7 +59,7 @@ class BrandController extends Controller
             if(isset($data['snapchat'])){
                 $brand->snapchat=$data['snapchat'];
             }
-           
+
             $brand->save();
             return ($brand);
         }
