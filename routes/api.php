@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\InfluencerController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\InstagramController;
 use App\Http\Controllers\Api\TikTokController;
-use App\Http\Controllers\BrandInformationController;
+use App\Http\Controllers\Api\BrandInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -87,9 +87,7 @@ Route::get('drafts', [CampaignController::class, 'getdrafts']);
 
 Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
-
-
-
+Route::put('brandinfo/{brandinfo}',[BrandInformationController::class,'update']);
 
 // Route::get('pending', [CampaignController::class, 'getpending']);
 // Route::get('completed', [CampaignController::class, 'getcompleted']);
