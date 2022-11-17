@@ -21,7 +21,7 @@ class TikTokDetailResource extends JsonResource
             'tt_stories_imgs' => $this->tt_stories_imgs,
             'tt_stories_vids' => $this->tt_stories_vids,
             'tt_vids' => $this->tt_vids,
-            'tt_vids_duration' => $this->tt_reel_duration,
+            'tt_vids_duration' => $this->tt_vids_duration,
             'tt_hashtags' => $this->tt_hashtags,
             'tt_tags' => $this->tt_tags,
         ];

@@ -17,6 +17,7 @@ class CampaignResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'brand_id'=>$this->brand_id,
             'title' => $this->title,
             'type' => $this->type,
             'country' => $this->country,
@@ -30,7 +31,8 @@ class CampaignResource extends JsonResource
             'completed' => $this->completed,
             'drafts' => $this->drafts,
             'instagram_info' => new InstagramDetailResource($this->instagramDetail),
-            'tiktok_info' => new TiktokDetailResource($this->tiktokDetail)
+            'tiktok_info' => new TiktokDetailResource($this->tiktokDetail),
+            'fees_info' => new FeesResource($this->fees)
         ];
     }
 }

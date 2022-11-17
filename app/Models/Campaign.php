@@ -25,8 +25,14 @@ class Campaign extends Model
         return $this->hasOne(TiktokDetail::class);
     }
 
+    public function fees()
+    {
+        return $this->hasOne(Fees::class);
+    }
+
     protected $fillable = [
         'title',
+        'brand_id',
         'type',
         'country',
         'details',

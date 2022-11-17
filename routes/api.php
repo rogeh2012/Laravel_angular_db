@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\InfluencerController;
 use App\Http\Controllers\Api\CampaignController;
 use App\Http\Controllers\Api\InstagramController;
 use App\Http\Controllers\Api\TikTokController;
+use App\Http\Controllers\Api\FeesController;
 use App\Http\Controllers\BrandInformationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,8 @@ Route::delete('/influencers/{influencer}', [InfluencerController::class,'destroy
 
 
 Route::get('campaigns', [CampaignController::class, 'index']);
+Route::get('/campaign', [CampaignController::class, 'campaign'])->middleware('auth:sanctum');
+
 Route::get('campaigns/{campaign}', [CampaignController::class, 'show']);
 Route::post('campaigns', [CampaignController::class, 'store']);
 Route::put('/campaigns/{campaign}', [CampaignController::class,'update']);
@@ -77,34 +80,17 @@ Route::delete('/campaigns/{campaign}', [CampaignController::class,'destroy']);
 
 Route::post('campaigns/instagram/{campaign}', [InstagramController::class, 'store']);
 Route::post('campaigns/tiktok/{campaign}', [TikTokController::class, 'store']);
+Route::post('campaigns/fees/{campaign}', [FeesController::class, 'store']);
 
 Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
 Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
+Route::put('campaigns/fees/{campaign}', [FeesController::class, 'update']);
+Route::put('campaigns/status/{campaign}', [CampaignController::class, 'updateStatus']);
 
-Route::get('pending', [CampaignController::class, 'getpending']);
-Route::get('completed', [CampaignController::class, 'getcompleted']);
-Route::get('drafts', [CampaignController::class, 'getdrafts']);
+Route::get('pending', [CampaignController::class, 'getpending'])->middleware('auth:sanctum');
+Route::get('completed', [CampaignController::class, 'getcompleted'])->middleware('auth:sanctum');
+Route::get('drafts', [CampaignController::class, 'getdrafts'])->middleware('auth:sanctum');
 
 Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 
-
-
-
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
-
-// Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
-// Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
-
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
-
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
