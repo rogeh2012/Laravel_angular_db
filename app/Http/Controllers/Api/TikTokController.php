@@ -46,16 +46,17 @@ public function update($campaignId)
 
     $tiktok = DB::table('tik_tok_details')
     ->where('campaign_id', $campaignId)
-    ->update([
-        'campaign_Id' => $campaignId,
-        'tt_posts_imgs'=> request()->tt_posts_imgs,
+    ->updateOrInsert(
+        ['campaign_Id' => $campaignId],
+        ['tt_posts_imgs'=> request()->tt_posts_imgs,
         'tt_posts_vids'=> request()->tt_posts_vids,
         'tt_stories_imgs'=> request()->tt_stories_imgs ,
         'tt_stories_vids'=> request()->tt_stories_vids,
         'tt_vids'=> request()->tt_vids,
         'tt_vids_duration'=> request()->tt_vids_duration,
         'tt_hashtags' =>request()->tt_hashtags,
-        'tt_tags'=> request()->tt_tags]);
+        'tt_tags'=> request()->tt_tags
+        ]);
 
     return ($tiktok);
 }
