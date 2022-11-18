@@ -19,6 +19,12 @@ class InfluencerController extends Controller
             return Influencer::find($influencerId);
         }
 
+        public function influencer(Request $request) {
+            // $influencerId = Auth::user();
+            $influencerId = $request->user();
+            return new ($influencerId) ;
+        }
+
         public function store()
         {
             $data = request()->all();
@@ -99,9 +105,7 @@ class InfluencerController extends Controller
             $influencer->gender = request()->gender;
             $influencer->children = request()->children;
             $influencer->country = request()->country;
-
             $influencer->save();
-
 
             return ($influencer);
         }

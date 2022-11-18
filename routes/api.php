@@ -36,8 +36,8 @@ Route::get('brands', [BrandController::class, 'index'])->middleware('auth:sanctu
 Route::get('/brand', [BrandController::class, 'brand'])->middleware('auth:sanctum');
 Route::get('brands/{brand}', [BrandController::class, 'show'])->middleware('auth:sanctum');
 Route::post('brands', [BrandController::class, 'store']);
-Route::put('/brands/{brand}', [BrandController::class,'update']);
-Route::delete('/brands/{brand}', [BrandController::class,'destroy']);
+Route::put('/brands/{brand}', [BrandController::class, 'update']);
+Route::delete('/brands/{brand}', [BrandController::class, 'destroy']);
 
 Route::post('brands/sanctum/token', function (Request $request) {
     $request->validate([
@@ -46,33 +46,33 @@ Route::post('brands/sanctum/token', function (Request $request) {
     ]);
 
     $brand = Brand::where('email', $request->email)->first();
-
-    if (! $brand || ! Hash::check($request->password, $brand->password)) {
+    if (!$brand || !Hash::check($request->password, $brand->password)) {
         throw ValidationException::withMessages([
             'email' => ['The provided credentials are incorrect.'],
         ]);
     }
 
-   $token = $brand->createToken($request->email)->plainTextToken;
-   return response()->json([
-    'access_token' => $token,
-    'isAdmin' => $brand['isAdmin'],
-   ]);
+    $token = $brand->createToken($request->email)->plainTextToken;
+    return response()->json([
+        'access_token' => $token,
+        'isAdmin' => $brand['isAdmin'],
+    ]);
 });
 
 Route::get('influencers', [InfluencerController::class, 'index']);
+Route::get('/influencer', [InfluencerController::class, 'influencer'])->middleware('auth:sanctum');
 Route::get('influencers/{influencer}', [InfluencerController::class, 'show']);
 Route::post('influencers', [InfluencerController::class, 'store']);
-Route::put('/influencers/{influencer}', [InfluencerController::class,'update']);
-Route::delete('/influencers/{influencer}', [InfluencerController::class,'destroy']);
+Route::put('/influencers/{influencer}', [InfluencerController::class, 'update']);
+Route::delete('/influencers/{influencer}', [InfluencerController::class, 'destroy']);
 
 
 
 Route::get('campaigns', [CampaignController::class, 'index']);
 Route::get('campaigns/{campaign}', [CampaignController::class, 'show']);
 Route::post('campaigns', [CampaignController::class, 'store']);
-Route::put('/campaigns/{campaign}', [CampaignController::class,'update']);
-Route::delete('/campaigns/{campaign}', [CampaignController::class,'destroy']);
+Route::put('/campaigns/{campaign}', [CampaignController::class, 'update']);
+Route::delete('/campaigns/{campaign}', [CampaignController::class, 'destroy']);
 
 
 Route::post('campaigns/instagram/{campaign}', [InstagramController::class, 'store']);
@@ -85,8 +85,8 @@ Route::get('pending', [CampaignController::class, 'getpending']);
 Route::get('completed', [CampaignController::class, 'getcompleted']);
 Route::get('drafts', [CampaignController::class, 'getdrafts']);
 
-Route::get('brandinfo',[BrandInformationController::class,'index']);
-Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+Route::get('brandinfo', [BrandInformationController::class, 'index']);
+Route::get('brandinfo/{brandinfo}', [BrandInformationController::class, 'show']);
 
 
 
