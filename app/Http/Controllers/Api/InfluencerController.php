@@ -20,11 +20,9 @@ class InfluencerController extends Controller
         }
 
         public function influencer(Request $request) {
-            // $influencerId = Auth::user();
-            $influencerId = $request->user();
-            return new ($influencerId) ;
+            $influencer = $request->user();
+            return  $influencer ;
         }
-
         public function store()
         {
             $data = request()->all();
@@ -92,16 +90,15 @@ class InfluencerController extends Controller
             $influencer->lname = request()->lname;
             $influencer->email = request()->email;
             $influencer->phone = request()->phone;
-            $influencer->password = request()->password;
-            $influencer->hear_about_us = request()->hear_about_us;
+            // $influencer->hear_about_us = request()->hear_about_us;
             $influencer->occupation = request()->occupation;
             $influencer->instagram = request()->instagram;
             $influencer->facebook = request()->facebook;
-            $influencer->snapchat = request()->snapchat;
+            // $influencer->snapchat = request()->snapchat;
             $influencer->age = request()->age;
             $influencer->price = request()->price;
-            $influencer->engagement_rate = request()->engagement_rate;
-            $influencer->followers = request()->followers;
+            // $influencer->engagement_rate = request()->engagement_rate;
+            // $influencer->followers = request()->followers;
             $influencer->gender = request()->gender;
             $influencer->children = request()->children;
             $influencer->country = request()->country;

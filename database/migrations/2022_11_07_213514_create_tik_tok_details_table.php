@@ -14,17 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tik_tok_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id')->n;
-            $table->integer('tt_posts_imgs');
-            $table->integer('tt_posts_vids');
-            $table->integer('tt_stories_imgs');
-            $table->integer('tt_stories_vids');
-            $table->integer('tt_vids');
-            $table->integer('tt_vids_duration');
-            $table->string('tt_hashtags', 500);
-            $table->string('tt_tags', 500);
+            $table->unsignedBigInteger('campaign_id');
+            $table->integer('tt_posts_imgs')->nullable();
+            $table->integer('tt_posts_vids')->nullable();
+            $table->integer('tt_stories_imgs')->nullable();
+            $table->integer('tt_stories_vids')->nullable();
+            $table->integer('tt_vids')->nullable();
+            $table->integer('tt_vids_duration')->nullable();
+            $table->string('tt_hashtags', 500)->nullable();
+            $table->string('tt_tags', 500)->nullable();
             $table->timestamps();
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');;
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
         });
     }
 
