@@ -144,6 +144,6 @@ class CampaignController extends Controller
 
      public function latest($lastUsedAt)
     {
-        return Campaign::where('created_at', '>', $lastUsedAt)->get();
+        return Campaign::where('created_at', '>', $lastUsedAt)->where('pending',0)->where('drafts',0)->where('completed',0)->where('privacy', 'public')->get();
     }
 }
