@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\InstagramController;
 use App\Http\Controllers\Api\TikTokController;
 use App\Http\Controllers\Api\BrandInformationController;
 use App\Http\Controllers\Api\FeesController;
+use App\Http\Controllers\Api\PaymentController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -125,3 +126,12 @@ Route::put('brandinfo/{brandinfo}',[BrandInformationController::class,'update'])
 Route::get('latest/{date}',[CampaignController::class,'latest']);
 
 Route::get('last-used-at',[BrandController::class,'getLastUsedAt'])->middleware('auth:sanctum');
+
+
+
+Route::get('payments', [PaymentController::class, 'index']);
+// Route::get('payments/{payment}', [PaymentController::class, 'show']);
+// Route::post('payments', [PaymentController::class, 'store']);
+// Route::put('/payments/{payment}', [PaymentController::class,'update']);
+// Route::delete('/payments/{payment}', [PaymentController::class,'destroy']);
+
