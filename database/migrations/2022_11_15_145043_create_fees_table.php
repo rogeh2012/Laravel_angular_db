@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('fees', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->unique();
             $table->integer('fees_amount');
             $table->string('fees_details')->nullable();
             $table->timestamps();

@@ -33,6 +33,7 @@ class CampaignController extends Controller
         public function store(Request $request)
         {
             $campaign = new Campaign;
+            $campaign -> brand_id = $request->input('brand_id');
             $campaign -> title = $request->input('title');
             $campaign -> type = $request->input('type');
             $campaign -> country = $request->input('country');
@@ -43,13 +44,13 @@ class CampaignController extends Controller
             $campaign -> pending = $request->input('pending');
             $campaign -> completed = $request->input('completed');
             $campaign -> drafts = $request->input('drafts');
-            if($request->hasFile('image')){
-                $file = $request->file('image');
-                $extention = $file->getClientOriginalExtension();
-                $fileName = time() . '.' . $extention; 
-                $file->move('campaignsImage',$fileName);
-                $campaign -> image = $fileName;
-            }
+            // if($request->hasFile('image')){
+            //     $file = $request->file('image');
+            //     $extention = $file->getClientOriginalExtension();
+            //     $fileName = time() . '.' . $extention;
+            //     $file->move('campaignsImage',$fileName);
+            //     $campaign -> image = $fileName;
+            // }
             $campaign->save();
             return $campaign;
             // $data = request()->all();
@@ -139,5 +140,10 @@ class CampaignController extends Controller
         $brandId = $request->user()->id;
         $campaigns = Campaign::where('brand_id',$brandId)->where('drafts', 1)->get();
         return CampaignResource::collection($campaigns);
+    }
+
+     public function latest($lastUsedAt)
+    {
+        return Campaign::where('created_at', '>', $lastUsedAt)->where('pending',0)->where('drafts',0)->where('completed',0)->where('privacy', 'public')->get();
     }
 }

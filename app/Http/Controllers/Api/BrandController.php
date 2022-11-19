@@ -6,11 +6,14 @@ use App\Models\Brand;
 use App\Models\BrandInformation;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BrandResource;
+use App\Models\Campaign;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 // use App\Models\Campaign;
 // use App\Models\Influencer;
+use App\Models\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 
 class BrandController extends Controller
 {
@@ -18,7 +21,7 @@ class BrandController extends Controller
     {
         // $allBrands = Brand::all();
         // return BrandResource::collection($allBrands);
-        return Brand::all();    
+        return Brand::all();
     }
     public function brand(Request $request) {
         // $brandId = Auth::user();
@@ -91,5 +94,14 @@ class BrandController extends Controller
 
         return "Brand $brandId deleted successfuly";
     }
+
+    public function getLastUsedAt(Request $request)
+    {
+        $accessToken = $request->bearerToken();
+        $token = SanctumPersonalAccessToken::findToken($accessToken);
+    
+        return $token;
+    }
+
 }
 

@@ -17,7 +17,6 @@ use App\Models\Influencer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -92,7 +91,7 @@ Route::post('influencers/sanctum/token', function (Request $request) {
    $token = $influencer->createToken($request->email)->plainTextToken;
    return response()->json([
     'access_token' => $token,
-    
+
    ]);
 });
 
@@ -123,20 +122,6 @@ Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 Route::put('brandinfo/{brandinfo}',[BrandInformationController::class,'update']);
 
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
+Route::get('latest/{date}',[CampaignController::class,'latest']);
 
-// Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
-// Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
-
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
-
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+Route::get('last-used-at',[BrandController::class,'getLastUsedAt'])->middleware('auth:sanctum');
