@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('campaign_id');
             $table->string('title');
             $table->string('type');
             $table->string('country');
@@ -23,8 +24,9 @@ return new class extends Migration
             $table->boolean('pending')->nullable();
             $table->boolean('completed')->nullable();
             $table->boolean('drafts')->nullable();
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->timestamps();
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
         });
     }
 

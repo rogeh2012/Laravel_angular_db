@@ -11,10 +11,6 @@ class Influencer extends Model
 {
     use HasApiTokens, HasFactory,Authenticatable;
 
-    public function campaigns()
-    {
-        return $this->belongsToMany(Campaign::class);
-    }
 
     protected $fillable = [
         'fname',

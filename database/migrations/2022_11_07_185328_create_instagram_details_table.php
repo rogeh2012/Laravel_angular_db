@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('instagram_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->unique();
             $table->integer('ig_posts_imgs')->nullable();
             $table->integer('ig_posts_vids')->nullable();
             $table->integer('ig_stories_imgs')->nullable();

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tik_tok_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->unique();
             $table->integer('tt_posts_imgs')->nullable();
             $table->integer('tt_posts_vids')->nullable();
             $table->integer('tt_stories_imgs')->nullable();
