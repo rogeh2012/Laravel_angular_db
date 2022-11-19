@@ -13,7 +13,7 @@ class CampaignController extends Controller
     public function index()
     {
         // $campaigns = Campaign::all();
-        $campaigns = Campaign::where('pending',0)->where('drafts',0)->where('completed',0)->get();
+        $campaigns = Campaign::all();
         return CampaignResource::collection($campaigns);
     }
 
@@ -32,6 +32,7 @@ class CampaignController extends Controller
 
         public function store(Request $request)
         {
+            $data = request()->all();
             $campaign = new Campaign;
             $campaign -> brand_id = $request->input('brand_id');
             $campaign -> title = $request->input('title');
