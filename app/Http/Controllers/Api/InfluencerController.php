@@ -23,8 +23,11 @@ class InfluencerController extends Controller
             $influencer = $request->user();
             return  $influencer ;
         }
-        public function store()
+        public function store(Request $request)
         {
+            $request->validate([
+                'email' => 'unique:influencers,email',
+            ]);
             $data = request()->all();
             $influencer = new Influencer();
             if(isset($data['fname'])){
@@ -79,7 +82,10 @@ class InfluencerController extends Controller
                 $influencer->country=$data['country'];
             }
             $influencer->save();
-            return ($influencer);
+            $token = $influencer->createToken($request->email)->plainTextToken;
+            return response()->json([
+             'access_token' => $token,
+            ]);
         }
 
         public function update($influencerId)

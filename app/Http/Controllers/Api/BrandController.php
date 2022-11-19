@@ -25,8 +25,11 @@ class BrandController extends Controller
         $brandId = $request->user();
         return new BrandResource($brandId) ;
     }
-        public function store()
+        public function store(Request $request)
         {
+            $request->validate([
+                'email' => 'unique:brands,email',
+            ]);
             $data = request()->all();
             $brand = new Brand();
             if(isset($data['fname'])){
@@ -59,9 +62,12 @@ class BrandController extends Controller
             if(isset($data['snapchat'])){
                 $brand->snapchat=$data['snapchat'];
             }
-
             $brand->save();
-            return ($brand);
+            $token = $brand->createToken($request->email)->plainTextToken;
+            return response()->json([
+             'access_token' => $token,
+             'isAdmin' => $brand['isAdmin'],
+            ]);
         }
 
         public function update($brandId)
