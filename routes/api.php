@@ -18,7 +18,6 @@ use App\Models\Influencer;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -124,28 +123,15 @@ Route::get('brandinfo',[BrandInformationController::class,'index']);
 Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
 Route::put('brandinfo/{brandinfo}',[BrandInformationController::class,'update']);
 
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
+Route::get('latest/{date}',[CampaignController::class,'latest']);
 
-// Route::put('campaigns/instagram/{campaign}', [InstagramController::class, 'update']);
-// Route::put('campaigns/tiktok/{campaign}', [TikTokController::class, 'update']);
-
-// Route::get('pending', [CampaignController::class, 'getpending']);
-// Route::get('completed', [CampaignController::class, 'getcompleted']);
-// Route::get('drafts', [CampaignController::class, 'getdrafts']);
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
-
-
-// Route::get('brandinfo',[BrandInformationController::class,'index']);
-// Route::get('brandinfo/{brandinfo}',[BrandInformationController::class,'show']);
+Route::get('last-used-at',[BrandController::class,'getLastUsedAt'])->middleware('auth:sanctum');
 
 
 
 Route::get('payments', [PaymentController::class, 'index']);
-Route::get('payments/{payment}', [PaymentController::class, 'show']);
-Route::post('payments', [PaymentController::class, 'store']);
-Route::put('/payments/{payment}', [PaymentController::class,'update']);
-Route::delete('/payments/{payment}', [PaymentController::class,'destroy']);
+// Route::get('payments/{payment}', [PaymentController::class, 'show']);
+// Route::post('payments', [PaymentController::class, 'store']);
+// Route::put('/payments/{payment}', [PaymentController::class,'update']);
+// Route::delete('/payments/{payment}', [PaymentController::class,'destroy']);
+

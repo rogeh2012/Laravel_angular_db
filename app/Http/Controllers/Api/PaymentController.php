@@ -4,51 +4,55 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Payment;
+// use App\Models\Payment;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
     public function index()
     {
-        return Payment::all();
+        $payments = DB::select("SELECT c.id, c.title, CONCAT(i.fname, ' ', i.lname) as influencer, f.fees_amount FROM campaigns c,
+         influencers i, fees f where c.influencer_id = i.id and c.id = f.campaign_id");
+
+        return $payments;
     }
 
-    public function store()
-    {
-        $data = request()->all();
-        $payment = new Payment();
-        $payment->fname=$data['fname'];
-        $payment->campaign=$data['campaign'];
-        $payment->influencer=$data['influencer'];
-        $payment->amount=$data['amount'];
-        $payment->service_fee=$data['service_fee'];
-        $payment->vat=$data['vat'];
+    // public function store()
+    // {
+    //     $data = request()->all();
+    //     $payment = new Payment();
+    //     $payment->fname=$data['fname'];
+    //     $payment->campaign=$data['campaign'];
+    //     $payment->influencer=$data['influencer'];
+    //     $payment->amount=$data['amount'];
+    //     $payment->service_fee=$data['service_fee'];
+    //     $payment->vat=$data['vat'];
 
-        $payment->save();
-        return ($payment);
-    }
+    //     $payment->save();
+    //     return ($payment);
+    // }
 
-    public function update($paymentId)
-    {
-        $payment = Payment::find($paymentId);
+    // public function update($paymentId)
+    // {
+    //     $payment = Payment::find($paymentId);
 
-        $payment->fname = request()->fname;
-        $payment->campaign = request()->campaign;
-        $payment->influencer = request()->influencer;
-        $payment->amount = request()->amount;
-        $payment->service_fee = request()->password;
-        $payment->vat = request()->vat;
+    //     $payment->fname = request()->fname;
+    //     $payment->campaign = request()->campaign;
+    //     $payment->influencer = request()->influencer;
+    //     $payment->amount = request()->amount;
+    //     $payment->service_fee = request()->password;
+    //     $payment->vat = request()->vat;
 
-        $payment->save();
+    //     $payment->save();
 
-        return ($payment);
-    }
-    public function destroy($paymentId)
-    {
-        $influencer = Payment::find($paymentId);
+    //     return ($payment);
+    // }
+    // public function destroy($paymentId)
+    // {
+    //     $influencer = Payment::find($paymentId);
 
-        $influencer->delete();
+    //     $influencer->delete();
 
-        return "influencer $paymentId deleted successfuly";
-    }
+    //     return "influencer $paymentId deleted successfuly";
+    // }
 }
