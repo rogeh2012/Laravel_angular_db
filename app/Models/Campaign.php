@@ -9,12 +9,6 @@ class Campaign extends Model
 {
     use HasFactory;
 
-    public function influencers()
-    {
-        return $this->belongsToMany(Influencer::class);
-
-    }
-
     public function instagramDetail()
     {
         return $this->hasOne(InstagramDetail::class);
@@ -25,8 +19,19 @@ class Campaign extends Model
         return $this->hasOne(TiktokDetail::class);
     }
 
+    public function fees()
+    {
+        return $this->hasOne(Fees::class);
+    }
+
+    public function influencer()
+    {
+        return $this->hasOne(Influencer::class);
+    }
+
     protected $fillable = [
         'title',
+        'brand_id',
         'type',
         'country',
         'details',

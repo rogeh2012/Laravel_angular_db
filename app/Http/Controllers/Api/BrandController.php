@@ -6,11 +6,14 @@ use App\Models\Brand;
 use App\Models\BrandInformation;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BrandResource;
+use App\Models\Campaign;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Auth;
 // use App\Models\Campaign;
 // use App\Models\Influencer;
+use App\Models\Sanctum\PersonalAccessToken;
+use Laravel\Sanctum\PersonalAccessToken as SanctumPersonalAccessToken;
 
 class BrandController extends Controller
 {
@@ -25,10 +28,13 @@ class BrandController extends Controller
         $brandId = $request->user();
         return new BrandResource($brandId) ;
     }
-        public function store()
+        public function store(Request $request)
         {
+            $request->validate([
+                'email' => 'unique:brands,email',
+            ]);
             $data = request()->all();
-            $brand = new Brand();     
+            $brand = new Brand();
             if(isset($data['fname'])){
                 $brand->fname=$data['fname'];
             }
@@ -59,9 +65,12 @@ class BrandController extends Controller
             if(isset($data['snapchat'])){
                 $brand->snapchat=$data['snapchat'];
             }
-           
             $brand->save();
-            return ($brand);
+            $token = $brand->createToken($request->email)->plainTextToken;
+            return response()->json([
+             'access_token' => $token,
+             'isAdmin' => $brand['isAdmin'],
+            ]);
         }
 
         public function update($brandId)
@@ -73,15 +82,13 @@ class BrandController extends Controller
         $brand->lname = request()->lname;
         $brand->email = request()->email;
         $brand->phone = request()->phone;
-        $brand->password = request()->password;
-        $brand->hear_about_us = request()->hear_about_us;
-        $brand->occupation = request()->occupation;
+        // $brand->password = request()->password;
+        // $brand->hear_about_us = request()->hear_about_us;
+        $brand->brand_name = request()->brand_name;
+        $brand->job_title = request()->job_title;
         $brand->instagram = request()->instagram;
-        $brand->facebook = request()->facebook;
         $brand->snapchat = request()->snapchat;
-
         $brand->save();
-
 
         return ($brand);
     }
@@ -93,5 +100,14 @@ class BrandController extends Controller
 
         return "Brand $brandId deleted successfuly";
     }
+
+    public function getLastUsedAt(Request $request)
+    {
+        $accessToken = $request->bearerToken();
+        $token = SanctumPersonalAccessToken::findToken($accessToken);
+    
+        return $token;
+    }
+
 }
 

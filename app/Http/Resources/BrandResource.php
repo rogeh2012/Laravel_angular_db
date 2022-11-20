@@ -22,6 +22,7 @@ class BrandResource extends JsonResource
             'password' => $this->password,
             'phone' => $this->phone,
             'hear_about_us' => $this->hear_about_us,
+            'isAdmin' => $this->isAdmin,
             'brand_name' => $this->brand_name,
             'job_title' => $this->job_title,
             'instagram' => $this->instagram,

@@ -14,17 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('instagram_details', function (Blueprint $table) {
-            $table->unsignedBigInteger('campaign_id');
-            $table->integer('ig_posts_imgs');
-            $table->integer('ig_posts_vids');
-            $table->integer('ig_stories_imgs');
-            $table->integer('ig_stories_vids');
-            $table->integer('ig_reels');
-            $table->integer('ig_reel_duration');
-            $table->string('ig_hashtags', 500);
-            $table->string('ig_tags', 500);
+            $table->unsignedBigInteger('campaign_id')->unique();
+            $table->integer('ig_posts_imgs')->nullable();
+            $table->integer('ig_posts_vids')->nullable();
+            $table->integer('ig_stories_imgs')->nullable();
+            $table->integer('ig_stories_vids')->nullable();
+            $table->integer('ig_reels')->nullable();
+            $table->integer('ig_reel_duration')->nullable();
+            $table->string('ig_hashtags', 500)->nullable();
+            $table->string('ig_tags', 500)->nullable();
             $table->timestamps();
-            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');;
+            $table->foreign('campaign_id')->references('id')->on('campaigns')->onDelete('cascade');
         });
     }
 

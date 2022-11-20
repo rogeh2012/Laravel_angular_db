@@ -19,8 +19,15 @@ class InfluencerController extends Controller
             return Influencer::find($influencerId);
         }
 
-        public function store()
+        public function influencer(Request $request) {
+            $influencer = $request->user();
+            return  $influencer ;
+        }
+        public function store(Request $request)
         {
+            $request->validate([
+                'email' => 'unique:influencers,email',
+            ]);
             $data = request()->all();
             $influencer = new Influencer();
             if(isset($data['fname'])){
@@ -75,7 +82,10 @@ class InfluencerController extends Controller
                 $influencer->country=$data['country'];
             }
             $influencer->save();
-            return ($influencer);
+            $token = $influencer->createToken($request->email)->plainTextToken;
+            return response()->json([
+             'access_token' => $token,
+            ]);
         }
 
         public function update($influencerId)
@@ -86,22 +96,19 @@ class InfluencerController extends Controller
             $influencer->lname = request()->lname;
             $influencer->email = request()->email;
             $influencer->phone = request()->phone;
-            $influencer->password = request()->password;
-            $influencer->hear_about_us = request()->hear_about_us;
+            // $influencer->hear_about_us = request()->hear_about_us;
             $influencer->occupation = request()->occupation;
             $influencer->instagram = request()->instagram;
             $influencer->facebook = request()->facebook;
-            $influencer->snapchat = request()->snapchat;
+            // $influencer->snapchat = request()->snapchat;
             $influencer->age = request()->age;
             $influencer->price = request()->price;
-            $influencer->engagement_rate = request()->engagement_rate;
-            $influencer->followers = request()->followers;
+            // $influencer->engagement_rate = request()->engagement_rate;
+            // $influencer->followers = request()->followers;
             $influencer->gender = request()->gender;
             $influencer->children = request()->children;
             $influencer->country = request()->country;
-
             $influencer->save();
-
 
             return ($influencer);
         }
